@@ -1,0 +1,19 @@
+{% assign product = all_products[section.settings.product_single_2] %}
+
+<div class="col-xs-12 col-sm-6 col-md-6">
+  <div class="product-info-ver2 center text-center">
+    <h3 class="product-title">{{ product.title}}</h3>
+    <p class="product-desc center">{{product.description}}</p>
+    <a href="{{ product.url | within: collection }}" class="btn-shop">{{section.settings.btn_name_2}}</a>
+  </div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6">
+  <div class="product-img">
+    <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-responsive">
+    <div class="ribbon-price-h left ribbon-mobile">
+      {% capture price %}{{ product.price | money }}{% endcapture %}
+      {% if product.price_varies %}<ins>{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}</ins>{% endif %}
+      {% if on_sale %} <del>{{ product.compare_at_price | money }}</del> {% endif %}
+    </div>
+  </div>
+</div>

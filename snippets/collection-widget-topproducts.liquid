@@ -1,0 +1,13 @@
+<div class="filter sidebar-filter-product">
+    <h3 class="filter-title">{{section.settings.shop_by_top_products}}</h3><div class="btn-filter-drop js-drop"><i class="ion-ios-arrow-down"></i></div>
+    <div class="clearfix"></div>
+    <div class="sidebar-product-list">
+        
+      	{%for product in collections[section.settings.product_collection].products limit:section.settings.product_limit%}
+
+                {% include 'pd-collection-sidebar' %}
+              		{% else %} 
+              	{% include 'empty-pd-collection-sidebar'%}
+              {% endfor %}
+    </div>
+</div>

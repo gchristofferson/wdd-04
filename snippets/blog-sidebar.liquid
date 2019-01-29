@@ -1,0 +1,99 @@
+<div class="sidebar col-xs-12 col-sm-4 col-md-3">
+    {% if section.settings.enable_widget_social %}
+    <div class="blog-social">
+        <h3 class="sidebar-heading v1">{{section.settings.widget_social_title}}</h3>
+        {% include 'social-share-article'%}
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_newletter %}
+    <div class="blog-newsletter">
+       <h3 class="sidebar-heading v1">{{section.settings.newletter_title}}</h3> 
+       {% if settings.newsletter_form_action != blank %}
+          {% assign form_action = settings.newsletter_form_action %}
+          {% else %}
+          {% assign form_action = '#' %}
+        {% endif %}
+        <form action="{{form_action}}" method="post" class="blog-newsletter-form">
+            <input type="email" name="Email" placeholder="{{section.settings.newletter_placeholder}}" class="form-control">
+            <button type="submit" class="btn f-btn-submit v-color1">{{section.settings.newletter_btn_name}}</button>
+        </form>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_rposts %}
+    <div class="widget widget-latest-post">
+        <h3 class="sidebar-heading v2">{{section.settings.widget_recent_title}}</h3>
+        {%- assign blog_selected = section.settings.select_blog -%}
+        {%- assign blog_limit = section.settings.limit_blog -%}
+        {% for article in blogs[blog_selected].articles limit: blog_limit %}
+        <div class="latest-item">
+          	{% for tag in article.tags %}
+            <a class="tag" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+            
+            <h3><a href="{{ article.url }}" class="v-color1">{{ article.title }}</a></h3>
+            <p>{{article.published_at | time_tag: format: 'month_day_year'}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_instagram %}
+
+        {% assign instafeed_img = '{{image}}' %}
+        {% assign instafeed_link = '{{link}}' %}
+        <script>
+        jQuery(document).ready(function($) {
+          var feed = new Instafeed({
+            get: 'user',
+            userId: '{{section.settings.instagram_userid}}',
+            accessToken: '{{section.settings.instagram_access_token}}',
+            template: '<a class="hover-images" href="{{instafeed_link}}"><img src="{{instafeed_img}}" alt="" class="img-responsive"></a>',
+            target: 'engoj_instagram_blogsidebar',
+            resolution: 'standard_resolution',
+            limit: '{{section.settings.instagram_limit_number}}'
+
+          });
+          feed.run();
+        });
+        </script>
+    <div class="widget widget-insta">
+        <h3 class="sidebar-heading v2">{{section.settings.widget_instagram_title}}</h3>
+        <div class="vow-instagram" id="engoj_instagram_blogsidebar">
+        </div>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_categories %}
+    <div class="widget widget-category">
+        <h3 class="sidebar-heading v2">{{section.settings.widget_categories_title}}</h3>
+        {% assign sidebar_menu = section.settings.widget_categories_menu %}
+        <ul>
+            {% for link in linklists[sidebar_menu].links %}
+              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+  	{% if section.settings.enable_widget_banner %}
+    <div class="widget widget-banner">
+        <a href="{{section.settings.img_url}}">
+
+            <img {%if section.settings.bg_img == blank%}src="{{'blog-banner.jpg'| asset_url }}" 
+                              {%else%}
+                              src="{{section.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+        </a>
+    </div>
+  	{% endif %}
+    {% if section.settings.enable_widget_tags %}
+    <div class="widget widget-tags">
+        <h3 class="sidebar-heading v2">{{section.settings.widget_tags_title}}</h3>
+        {% capture tags %}{% for tag in blog.all_tags %}{{ tag }} {% endfor %}{% endcapture %}
+          {% for tag in blog.all_tags %}
+          {% assign check = tag | downcase | split:' ' %}
+          {% unless dates contains check[0] %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" title="{{ tag }}" class="active">
+            {{ tag }}
+          </a>
+          {% endunless %} 
+          {% endfor %}
+    </div>
+    {% endif %}
+</div>

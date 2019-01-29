@@ -1,0 +1,86 @@
+<!-- collection-template.liquid -->
+{% comment %}
+For more information on collection tags:
+- http://docs.shopify.com/themes/liquid-variables/collection
+{% endcomment %}
+
+{% if template contains 'collection.full' %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% elsif template contains 'collection.fullwidth' %}
+	{%- assign per_page = 12 -%}
+{% elsif template contains 'collection.24' %}
+	{%- assign per_page = 24 -%}
+{% elsif template contains 'collection.36' %}
+	{%- assign per_page = 36 -%}
+{% else %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% endif %}
+
+
+{% paginate collection.products by per_page %}
+
+{% comment %}
+Use .grid--rev so that the collection tags appear below the products on mobile
+{% endcomment %}
+
+    {% include 'collection-template-full' %}
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_bg",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Widget config"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "text",
+      "id": "widget_cate_title",
+      "label": "Title Widget",
+      "default": "Categories"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Price"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_price_title",
+      "label": "Title Widget",
+      "default": "Price Filter"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_price_list_tags",
+      "info": "Shop by Price list tags is tags in product",
+      "label": "Shop by Price list tags"
+    },
+    {
+      "type": "header",
+      "info": "Brand is vendor in product",
+      "content": "Widget Filter by Brand"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_brand_title",
+      "label": "Widget Title",
+      "default": "Brand"
+    }
+  ]
+}
+{% endschema %}

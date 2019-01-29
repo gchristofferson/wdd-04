@@ -1,0 +1,87 @@
+<div data-section-id="{{ section.id }}" data-section-type="collection-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!-- shop by cate-->
+  <div class="new-collection">
+      <div class="container">
+          <h3 class="vow-title">{{section.settings.title}}</h3>
+          <div class="row">
+            {% if section.blocks.size > 0 %} 
+         		{% for block in section.blocks %}
+              <div class="col-xs-6 col-sm-3 col-md-3 c-item">
+                  <a href="{{block.settings.img_url}}" class="hover-images">
+                      <img {%if block.settings.shop_img == blank%}src="{{'home1_c1.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{block.settings.shop_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />   
+                  </a>
+                  <h3 class="h-colect-title">{{block.settings.title}}</h3>
+              </div>
+            {% endfor %}
+      		{% endif %}
+              
+          </div>
+      </div>
+  </div>
+  <!-- end shopbycate-->
+</div>
+{% schema %}
+{
+  "name": "Collection v1",
+  "max_blocks": 4,
+  "class": "index-section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Space"
+  },
+  {
+    "type": "text",
+    "id": "margin_top",
+    "label": "Margin Top",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+  {
+    "type": "text",
+    "id": "margin_bottom",
+    "label": "Margin Bottom",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+	{
+        "type": "text",
+        "id": "title",
+		"default":"New collections",
+        "label": "Heading"
+      }
+],
+"blocks": [
+  {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "shop_img",
+        "label": "Image",
+        "info": "270 x 410px recommended"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Collection title"
+      },
+      {
+        "id": "img_url",
+        "type": "url",
+        "default": "/collections/all",
+        "label": "Image link"
+      }
+    ]
+  }
+],
+
+  "presets": [
+    {
+      "name": "Collection v1",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+<div class="col-xs-12 col-sm-4 col-md-4 blog-item">
+    <div class="post-info">
+        <div class="post-date">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+        <h3 class="post-title"><a href="{{ article.url }}">{{article.title}}</a></h3>
+        <div class="post-desc">{{article.content}}</div>
+        <a href="{{article.url}}" class="btn-find">FIND OUT MORE »</a>
+    </div>
+</div>

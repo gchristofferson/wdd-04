@@ -1,0 +1,9 @@
+<!-- /templates/404.liquid -->
+<div class="container">
+  <div class="error text-center">
+    <img src="{% if settings.error_image == blank %}https://placehold.it/500x182{% else %}{{settings.error_image|img_url:'master'}}{% endif %}" alt="">
+    <h1 class="error-title">{{settings.error_content1}}</h1>
+    <p class="error-desc">{{settings.error_content2}}</p>
+    <a href="{{settings.error_btn_url}}" class="btn-back">{{settings.error_btn_name}}</a>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="single-post">
+    <div class="container">
+        <div class="post-content text-center">
+            {% include 'breadcrumb'%}
+           <div class="heading-content">
+                {% if section.settings.show_date%}
+               <p>{{article.published_at | time_tag: format: 'month_day_year'}}</p>
+               {% endif %}
+               <div class="element-content">
+                    <a href="{{blog.previous_article}}" class="backto v2 prev hidden-xs"><i class="ion-ios-arrow-left"></i></a>
+                   <h3>{{ article.title }}</h3>
+                    <a href="{{blog.next_article}}" class="backto v2 next hidden-xs"><i class="ion-ios-arrow-right"></i></a>
+               </div>
+               <div class="post-element v3">
+                    <div class="post-date">{{ article.author }}</div>
+                    <div class="post-date post-author"><i class="fa fa-share-alt"></i></div>
+                </div>
+           </div>
+           <div class="single-post-content">
+               {{ article.content}}
+           </div>
+        </div>
+        {% include 'comment-article'%}
+    </div>
+    {% include 'related-article'%}
+</div>

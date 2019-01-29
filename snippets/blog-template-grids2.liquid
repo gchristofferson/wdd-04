@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="blog-top">
+        <div class="blog-sort">
+            
+        </div>
+        <div class="blog-pagination">
+                <span>{{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}</span>
+               {% if paginate.previous.is_link %}
+                    <a href="{{ paginate.previous.url }}" class="backto vow-right"><i class="ion-ios-arrow-left"></i></a>
+                    {% endif %}
+               {% if paginate.next.is_link %}
+                <a href="{{ paginate.next.url }}" class="backto vow-right"><i class="ion-ios-arrow-right"></i></a>
+                  {% endif %}
+        </div>
+    </div>
+    <div class="blog-grid">
+        <div class="row engoc-row-equal">
+            {% for article in blog.articles %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 blog-item">
+                {% if article.image %}
+                <div class="post-img"><a class="hover-images" href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.title }}" class="img-responsive"></a></div>
+                {% endif %}
+                <div class="post-info v2">
+                    <h3 class="post-title v3"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                    <div class="post-element">
+                        {% if section.settings.blog_show_date %}
+                        <div class="post-date">{{ article.created_at | date: "%B %d, %Y" }}</div>
+                        {% endif %}
+                        <div class="post-date post-author">By : Shival</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="blog-bottom productfull-bottom">
+        {% include 'pagination'%}
+    </div>
+</div>

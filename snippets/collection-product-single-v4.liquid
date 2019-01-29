@@ -1,0 +1,7 @@
+{% assign product = all_products[section.settings.b2_product_single_2] %}
+<div class="collection-item align-left">
+   <a href="{{ product.url | within: collection }}" class="hover-images"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-responsive"></a>
+   <div class="product-info v2 absolute-title">
+       <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h3>
+   </div>
+</div>

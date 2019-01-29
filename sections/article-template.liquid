@@ -1,0 +1,29 @@
+<!-- /sections/article-template.liquid -->
+
+{% include 'article-template-no-sidebar' %}
+
+
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Related posts"
+    },
+    {
+      "type": "blog",
+      "id": "choose_blog",
+      "label": "Choose Blog"
+    }
+    
+  ]
+}
+{% endschema %}

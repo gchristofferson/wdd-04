@@ -1,0 +1,36 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..5) %}
+<div class="product-item">
+    <div class="product-img">
+        <a class="hover-images" href="/admin/products">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      		{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      	</a>
+        <div class="overlay-img product-action box-content-left">
+            <a href="#" class="btn-cart" title="Add to cart"><i class="icon-bag"></i></a>
+            <a href="#" class="btn-wishlist" title="Wishlist"><i class="icon-heart"></i></a>
+            <a href="#" class="btn-switch" title="Compare"><i class="icon-shuffle"></i></a>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3 class="product-title"><a href="/admin/products" title="ShopiLaunch Product">Beaded Flower Headband</a></h3>
+        <div class="product-price">
+            <p class="price-n">$145.00</p>
+        </div>
+        <p class="product-desc">
+            Dress by SOAKED IN LUXURY. Long sleeves and rounded neckline. Mesh at neckline and on sleeves. Bodycon fit. Concealed zipper and button fastening to reverse.
+        </p>
+        <div class="product-action-ver2">
+            <a class="v-add-cart">Add to cart</a>
+            <a class="button v-wishlist"><i class="icon-heart"></i></a>
+            <a class="button v-switch"><i class="icon-shuffle"></i></a>
+        </div>
+    </div>
+</div>
+{% endfor %}

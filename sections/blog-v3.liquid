@@ -1,0 +1,196 @@
+<div data-section-id="{{ section.id }}" data-section-type="test-blog-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <!--blog-->
+    <div class="vow-connect v2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="testimonial">
+                            <h3 class="vow-title v4">Testimonial</h3>
+                            <div class="owl-carousel owl-theme js-owl-test">
+                              {% if section.blocks.size > 0 %} 
+         							{% for block in section.blocks %}
+                                <div class="test-item-list">
+                                 
+                                    <div class="test-item">
+                                        <div class="test-img">
+                                            <a href="#" class="hover-images">
+                                              <img {%if block.settings.b1_test_img == blank%}src="{{'h3_test1.jpg'| asset_url }}" 
+                                                  {%else%}
+                                              src="{{block.settings.b1_test_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />   
+                                          	</a>
+                                            <h3 class="test-name">{{block.settings.b1_title_2}}</h3>
+                                        </div>
+                                        <div class="test-text">
+                                            <p>{{block.settings.b1_title_1}}</p>
+                                        </div>
+                                      
+                                      
+                                    </div>
+                                   
+                                 	<div class="test-item">
+                                        <div class="test-img">
+                                            <a href="#" class="hover-images">
+                                              <img {%if block.settings.b2_test_img == blank%}src="{{'h3_test1.jpg'| asset_url }}" 
+                                                  {%else%}
+                                              src="{{block.settings.b2_test_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />   
+                                          	</a>
+                                            <h3 class="test-name">{{block.settings.b2_title_2}}</h3>
+                                        </div>
+                                        <div class="test-text">
+                                            <p>{{block.settings.b2_title_1}}</p>
+                                        </div>
+                                      
+                                      
+                                    </div>
+                                  
+                                  <div class="test-item">
+                                        <div class="test-img">
+                                            <a href="#" class="hover-images">
+                                              <img {%if block.settings.b3_test_img == blank%}src="{{'h3_test1.jpg'| asset_url }}" 
+                                                  {%else%}
+                                              src="{{block.settings.b3_test_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />   
+                                          	</a>
+                                            <h3 class="test-name">{{block.settings.b3_title_2}}</h3>
+                                        </div>
+                                        <div class="test-text">
+                                            <p>{{block.settings.b3_title_1}}</p>
+                                        </div>
+                                      
+                                      
+                                    </div>
+                                </div>
+								  {% endfor %}
+      							{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 border-center">
+                        <div class="blog v3">
+                            <h3 class="vow-title v4">{{section.settings.blog_title}}</h3>
+                          	{% for article in blogs[section.settings.blog_blog].articles limit: section.settings.blog_limit %}
+								{% include 'blog-list-v3' %}
+                            {% else %}
+                                {% include 'empty_blog-v3' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--end blog-->
+</div>
+
+{% schema %}
+
+  {
+    "name": "Testimonial Blog v1",
+	"max_blocks": 3,
+    "class" : "index-section",
+    "settings": [
+		{
+        "type": "header",
+        "content": "Tesimonial"
+      },
+      {
+        "type": "header",
+        "content": "Blog"
+      },
+      {
+        "type": "text",
+        "id": "blog_title",
+        "label": "Title",
+        "default": "Lastest Blog post"
+      },
+      {
+        "type": "blog",
+        "id": "blog_blog",
+        "label": "Select blog"
+      },
+      {
+        "type": "text",
+        "id": "blog_limit",
+        "label": "Limit",
+        "default": "2"
+      },
+		
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+    ],
+	"blocks": [
+      {
+        "type": "image",
+        "name": "Image Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "b1_test_img",
+          	"label": "Image Slider",
+			"info": "104 x 101px recommended"
+          },
+			{
+            "type": "text",
+            "id": "b1_title_1",
+            "label": "Text"
+          },
+				{
+            "type": "text",
+            "id": "b1_title_2",
+            "label": "Author name"
+          },
+			{
+            "type": "image_picker",
+          	"id": "b2_test_img",
+          	"label": "Image Slider",
+			"info": "104 x 101px recommended"
+          },
+			{
+            "type": "text",
+            "id": "b2_title_1",
+            "label": "Text"
+          },
+				{
+            "type": "text",
+            "id": "b2_title_2",
+            "label": "Author name"
+          },
+		{
+            "type": "image_picker",
+          	"id": "b3_test_img",
+          	"label": "Image Slider",
+			"info": "104 x 101px recommended"
+          },
+			{
+            "type": "text",
+            "id": "b3_title_1",
+            "label": "Text"
+          },
+				{
+            "type": "text",
+            "id": "b3_title_2",
+            "label": "Author name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonial and Blog v1",
+        "category": "Testimonial and Blog"
+      }
+    ]
+  }
+{% endschema %}

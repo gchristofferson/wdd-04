@@ -1,0 +1,17 @@
+<div class="product-item-inline">
+    <div class="product-img">
+        <a href="{{ product.url | within: collection }}" class="hover-images">
+          <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-reponsive">
+      	</a>
+    </div>
+    <div class="product-info">
+        <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h3>
+        <div class="product-price">
+          	{% capture price %}{{ product.price | money }}{% endcapture %}
+            <p class="price-n">
+          		{% if product.price_varies %}<ins>{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}</ins>{% endif %}
+              {% if on_sale %} - <del>{{ product.compare_at_price | money }}</del>{% endif %} 
+          	</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+
+<div class="new-collection vow-collect-cate">
+    <div class="container">
+      	{% if section.settings.enable_section%}
+        <h3 class="vow-title text-center">{{section.settings.title_section}}</h3>
+      	{% endif %}
+        <div class="row">
+            {% for collection in collections %}
+              {% include 'collection-grid-item'%}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "List collections",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "header",
+        "content": "Box Title"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_section",
+        "label": "Enable?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title_section",
+        "label": "Section Title",
+        "default": "The Vow Collection Categories"
+      }
+  ]
+  }
+{% endschema %}

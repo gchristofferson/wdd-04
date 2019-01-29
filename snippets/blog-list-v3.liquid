@@ -1,0 +1,10 @@
+<div class="blog-item">
+    <div class="post-img">
+        <a href="{{ article.url }}" class="hover-images"><img src="{{article.image.src| img_url:'master'}}" alt="" class="img-responsive"></a>
+    </div>
+    <div class="post-info v2">
+        <div class="post-date v2 f-14">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+        <h3 class="post-title v2"><a href="{{ article.url }}">{{article.title}}</a></h3>
+        <a href="{{ article.url }}" class="btn-find v3">FIND OUT MORE »</a>
+    </div>
+</div>

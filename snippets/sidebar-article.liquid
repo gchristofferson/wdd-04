@@ -1,0 +1,110 @@
+{% if section.settings.enable_widget_search %}
+<aside class="widget widget_search">
+  <form action="/search" class="search-form">
+    <input type="hidden" name="type" value="product" />
+    <input type="text" name="q" placeholder="{{section.settings.serch_placeholder}}" {% if search.performed %} value="{{ search.terms | escape | downcase }}"{% endif %}>
+    <button type="submit" class="btn btn-search">
+      <i class="icon-magnifier"></i>
+    </button>
+  </form>
+</aside>
+{% endif %}
+{% if section.settings.show_social_share %}
+<aside class="widget widget_social">
+  <h3 class="widget-title">{{section.settings.widget_social_title}}</h3>
+  {% include 'social-footer'%}
+</aside>
+{% endif %}
+{% if section.settings.enable_widget_categories %}
+<aside class="widget widget_category">
+  <h3 class="widget-title">{{section.settings.widget_categories_title}}</h3>
+  {% assign sidebar_menu = section.settings.widget_categories_menu %}
+  <ul>
+    {% for link in linklists[sidebar_menu].links %}
+    <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %}
+{% if section.settings.enable_widget_rposts %}
+<aside class="widget widget_popular_posts">
+  <h3 class="widget-title">{{section.settings.widget_recent_title}}</h3>
+  {%- assign blog_selected = section.settings.select_blog -%}
+  {%- assign blog_limit = section.settings.limit_blog -%}
+  <div class="post-item-list">
+    {% for article in blogs[blog_selected].articles limit: blog_limit %}
+    <div class="post-item">
+      <div class="post-item-img">
+        <a href="{{ article.url }}">
+          {{ article | img_url: '98x98' | img_tag: article.title }}
+        </a>
+      </div>
+      <div class="post-item-text">
+        <div class="post-date">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</aside>
+{% endif %}
+{% if section.settings.enable_widget_newletter %}
+<aside class="widget widget_newletters">
+  <h3 class="widget-title">{{section.settings.newletter_title}}</h3>
+  <div class="newletter-form">
+    {% if settings.newsletter_form_action != blank %}
+    {% assign form_action = settings.newsletter_form_action %}
+    {% else %}
+    {% assign form_action = '#' %}
+    {% endif %}
+    <form action="{{form_action}}" method="post">
+      <input type="email" name="Email" placeholder="{{section.settings.newletter_placeholder}}" class="form-control">
+      <button type="submit" class="btn btn-submit">{{section.settings.newletter_btn_name}}</button>
+    </form>
+  </div>
+</aside>
+{% endif %}
+{% if section.settings.enable_widget_instagram %}
+
+{% assign instafeed_img = '{{image}}' %}
+{% assign instafeed_link = '{{link}}' %}
+<script>
+  jQuery(document).ready(function($) {
+    var feed = new Instafeed({
+      get: 'user',
+      userId: '{{section.settings.instagram_userid}}',
+      accessToken: '{{section.settings.instagram_access_token}}',
+      template: '<div class="item"><a class="hover-images" href="{{instafeed_link}}"><img src="{{instafeed_img}}" alt="" class="img-responsive"></a></div>',
+      target: 'engoj_instagramv3',
+      resolution: 'standard_resolution',
+      limit: '{{section.settings.instagram_limit_number}}'
+
+    });
+    feed.run();
+
+
+  });
+</script>
+<aside class="widget widget_instagram">
+  <h3 class="widget-title">{{section.settings.widget_instagram_title}}</h3>
+  <div class="cosre-instagram" id="engoj_instagramv3">
+
+  </div>
+</aside>
+{% endif %}
+{% if section.settings.enable_widget_tags %}
+<aside class="widget widget_tags">
+  <h3 class="widget-title">{{section.settings.widget_tags_title}}</h3>
+  <div class="content">
+    {% capture tags %}{% for tag in blog.all_tags %}{{ tag }} {% endfor %}{% endcapture %}
+    {% for tag in blog.all_tags %}
+    {% assign check = tag | downcase | split:' ' %}
+    {% unless dates contains check[0] %}
+    <a href="{{ blog.url }}/tagged/{{ tag | handle }}" title="{{ tag }}" class="active">
+      {{ tag }}
+    </a>
+    {% endunless %} 
+    {% endfor %}
+  </div>
+</aside>
+{% endif %}

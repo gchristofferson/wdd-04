@@ -1,0 +1,106 @@
+<header id="header" class="header-v4 {%if settings.enable_hdv4_ovl == true %} header-top-absolute {% endif %} ">
+<div class="container">
+<div class="row">
+  <div class="vow-topbar">
+      <div class="topbar-mobile-l hidden-lg hidden-md">
+          <div class="element-mobile hidden-xs">
+              <div class="has-element">
+                  <div class="element-language dropdown">
+                      <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+            <span>{{settings.language_default}}</span>
+            <span class="fa fa-caret-down f-10"></span>
+          </a>
+                      <ul class="dropdown-menu" aria-labelledby="label2">
+                          {%for i in (1..6)%}
+                                {%capture _enable%}language{{i}}_enable{%endcapture%}
+                                {%capture _text%}language{{i}}_text{%endcapture%}
+                                {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                                {%assign enable = settings[_enable]%}
+                                {%assign text = settings[_text]%}
+                                {%assign url = settings[_url]%}
+                                <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                                {% endfor %}
+                      </ul>
+                  </div>
+                  <div class="element-currency dropdown">
+                      <a id="label3" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+            <span>{{shop.currency}}</span>
+            <span class="fa fa-caret-down f-10"></span>
+          </a>
+                      <ul class="dropdown-menu" aria-labelledby="label3">
+                          {% assign supported = settings.supported_currencies | split: ' ' %}
+                          {% for c in supported %}
+                          <li><a data-currency="{{c}}">{{c}}</a></li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="element-mobile">
+              <a href="#" data-toggle="modal" data-target="#myModal"><i class="{{settings.hdv4_topbar_icon2}} icon-rotate-90 f-24"></i></a>
+          </div>
+          <div class="element-mobile">
+              <a href="#" class="cart-mobile open-cart">
+                {%if settings.hdv4_cart_type =='Image' %}
+                	<img src="{{'hdv4_image_cart.png'|asset_url}}" alt="" class="img-reponsive">
+                {%else%}
+              		<i class="{{settings.hdv4_icon_cart}} f-24"></i>
+              	{% endif %}
+                <span class="count cart-count mobile v2 enj-cartcount ">{{ cart.item_count }}</span>
+            </a>
+          </div>
+          <div class="element-mobile">
+              <a href="/pages/wish-list"><i class="{{settings.hdv4_topbar_icon1}} f-24"></i></a>
+          </div>
+          <div class="element-mobile">
+              
+            	{% if customer.email != blank %}
+                <a href="/account/logout" title="logout"><i class="icon-logout f-16 f-style"></i></a>
+                {% else %}
+                <a href="/account/login" title="login"><i class="{{settings.hdv4_topbar_icon3}} f-16 f-style"></i></a>
+                {% endif %}
+          </div>
+      </div>
+      <div class="topbar-left v4 hidden-xs hidden-sm">
+          <div class="vow-icon-menu v4 js-menu hidden-xs hidden-sm">
+              <span class="vow-iconbar"></span>
+              <span class="vow-iconbar"></span>
+              <span class="vow-iconbar"></span>
+          </div>
+          <ul class="navbar-topbar-left">
+              <li><a href="#" class="open-cart">My cart 
+                <span class="enj-cartcount">({{ cart.item_count }})</span>
+              </a></li>
+              <li><a href="/account/login">Login</a></li>
+              <li><a href="/account/register">Register</a></li>
+          </ul>
+      </div>
+      <div class="topbar-right">
+          <div class="logo v4">
+            <a href="{{shop.url}}" title="{{shop.name}}">
+              <img 
+              {%if settings.hdv4_logo == blank%}src="{{'hdv4_logo.png'| asset_url }}" 
+              {%else%}src="{{settings.hdv4_logo | img_url:'master'}}" class="img-reponsive"{%endif%} alt="logo" />
+            </a>
+        	</div>
+          <button type="button" class="navbar-toggle vow-icon-menu v4 js-menu icon-mobile hidden-lg hidden-md" data-toggle="collapse" data-target="#myNavbar">
+              <span class="vow-iconbar"></span>
+              <span class="vow-iconbar"></span>
+              <span class="vow-iconbar"></span>
+          </button>
+      </div>
+  </div>
+  <div class="vow-bottom">
+
+          <nav class="main-menu v2 js-open-menu">
+              <div class="collapse navbar-collapse" id="myNavbar">
+                   {% include 'menu'%}
+              </div>
+          </nav>
+      </div>
+</div>
+</div>
+</header>

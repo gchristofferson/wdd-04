@@ -1,0 +1,25 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+<div class="col-xs-12 col-sm-6 col-md-6 flex-img">
+    <div class="product-img">
+        {{ 'product-1' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        <div class="ribbon">HOT
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="product-info v4">
+        <p class="sku">// Sku: 8129005</p>
+        <h3 class="product-name"><a href="#">ShopiLaunch Product</a></h3>
+        <p class="product-desc-ver2">Lorem Ipsum has been the industry’s standard dummy text ever since. Lorem Ipsum is simply dummy text of the printing and typesetting industry into stiff sections.</p>
+        <p class="product-price">$1,950.00</p>
+        <a href="/admin/products" class="btn-addcart">Add to cart</a>
+        <div class="countdown countdown-time" data-countdown="countdown" data-date="08-31-2018-00-00-00">
+        </div>
+    </div>
+</div>

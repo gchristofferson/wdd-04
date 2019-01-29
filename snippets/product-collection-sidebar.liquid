@@ -1,0 +1,129 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %} 
+<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+    <div class="product-img">
+        <a class="hover-images" href="{{ product.url | within: collection }}">
+            <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-reponsive">
+        </a>
+        <div class="overlay-img product-action box-content-left">
+                    {% if sold_out %}
+            <a class="btn-cart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ 'products.product.unavailable' | t }}">
+          {% if settings.pia_sold_show%}
+                  <i class="{{settings.pia_sold}}"></i>
+                {%endif%} 
+                
+            </a>
+            {% else %}
+              {% if product.variants.size > 1 %}
+                <a class="btn-cart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ settings.pia_selectoption_name }}">
+                  {% if settings.pia_selectoption_show%}
+                  <i class="{{settings.pia_selectoption}}"></i>
+                  {%endif%}
+
+                  
+                </a>
+                {% else %}
+                <form method="post" action="/cart/add" class="">
+                  <span class="sr-only">{{ 'products.product.addtocart' | t }}</span>
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <button type="submit" name="add" id="AddToCart{{ product.id }}" class="btn-cart no-border text-uppercase enj-add-to-cart-btn" data-toggle="tooltip" title="{{ settings.pia_addcart_name }}">
+
+                    {%if settings.pia_addcart_show %}
+                    <i class="{{settings.pia_addcart}} f-15"></i> 
+                    {% endif %}
+                    
+                  </button>
+                </form>
+            {% endif %}
+        {% endif %}
+        {%if settings.pia_wishlist_show%}
+            {% include 'add-wishlist-v1'%}
+        {% endif %}
+        
+        <a href="javascript:void(0)" class="btn-quickview btn-switch text-uppercase engoj_btn_quickview" data-id="{{ product.handle }}" data-toggle="tooltip" title="{{ settings.pia_quickview_name }}">
+          {%if settings.pia_quickview_show %}
+          <i class="{{settings.pia_quickview}}"></i>
+          {% endif %}
+        </a>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h3>
+        <div class="product-price">
+      {% capture price %}{{ product.price | money }}{% endcapture %}
+             <p class="price-n">
+                {% if product.price_varies %}<ins>{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}</ins>{% endif %}
+               {% if on_sale %} - <del>{{ product.compare_at_price | money }}</del>{% endif %} 
+                
+            </p>
+        </div>
+        <p class="product-desc">
+            {{ product.description | strip_html | truncatewords: 35}}
+        </p>
+        <div class="product-action-ver2">
+                    {% if sold_out %}
+            <a class="v-add-cart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ 'products.product.unavailable' | t }}">
+          
+                <span  class="">{{ 'products.product.unavailable' | t }}</span>
+            </a>
+            {% else %}
+              {% if product.variants.size > 1 %}
+                <a class="v-add-cart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ settings.pia_selectoption_name }}">
+                  
+
+                  <span class="">{{settings.pia_selectoption_name }}</span>              
+                </a>
+                {% else %}
+                <form method="post" action="/cart/add" class="form-addtocart">
+                  <span class="sr-only">{{ 'products.product.addtocart' | t }}</span>
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <button type="submit" name="add" id="AddToCart{{ product.id }}" class="v-add-cart no-border enj-add-to-cart-btn" data-toggle="tooltip" title="{{ settings.pia_addcart_name }}">
+
+                    {{ settings.pia_addcart_name }}
+                    
+                  </button>
+                </form>
+            {% endif %}
+        {% endif %}
+        {%if settings.pia_wishlist_show%}
+            {% include 'add-wishlist-v2'%}
+        {% endif %}
+        
+        <a href="javascript:void(0)" class="btn-quickview button v-switch text-uppercase engoj_btn_quickview" data-id="{{ product.handle }}" data-toggle="tooltip" title="{{ settings.pia_quickview_name }}">
+          {%if settings.pia_quickview_show %}
+          <i class="{{settings.pia_quickview}}"></i>
+          {% endif %}
+        </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<footer class="footer-v4 bg-v4">
+  <div class="container">
+      <div class="row">
+          {% if settings.fv2_copyright != blank %}
+          <span>{{settings.fv2_copyright}}</span>
+          {% else %}
+          <span>Copyright &copy; {{ 'now' | date: "%Y" }} EngoTheme. All Rights Reserved</span>
+        	{% endif %}
+          <div class="footer-left">
+            	{% assign footer_menu = settings.fv2_menu%}
+              <ul class="footer-menu">
+                  {% for link in linklists[footer_menu].links %}
+                  <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                  {%endfor%}
+              </ul>
+              <div class="f-social-menu">
+                  {{settings.fv2_social}}
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>

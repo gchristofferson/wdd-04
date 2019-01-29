@@ -1,0 +1,13 @@
+
+
+<div class="filter-block filter-cate">
+    <div class="form-group">
+        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">{{section.settings.widget_cate_title}}
+        </button>
+        <ul class="dropdown-menu">
+            {% for collection in collections %}
+          <li {% if collection_title == collection.title %}class="active" {% endif %}><a  href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }} </a></li>
+      {% endfor %}
+        </ul>
+    </div>
+</div>

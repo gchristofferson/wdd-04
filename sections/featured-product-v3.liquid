@@ -1,0 +1,86 @@
+<div data-section-id="{{ section.id }}" data-section-type="featured-product-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--wrapper product-->
+  <div class="featured-product v3">
+            <div class="container">
+                <h3 class="vow-title v3">{{section.settings.heading_text}}</h3>
+                <div class="row">
+                    {%for product in collections[section.settings.product_collection].products limit:section.settings.product_limit%}
+                            {% include 'product-list-8-v3' %}
+                        {% else %} 
+                            {% include 'empty-product-grid-8-v3'%}
+                        {% endfor %}
+                </div>
+            </div>
+        </div>    
+    <!--end wrapper product-->
+</div>
+{% schema %}
+{
+  "name": "Featured product v3",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+    "type":"header",
+    "content":"Heading Title"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Title",
+      "default": "Featured Products"
+    },
+{
+	"type":"header",
+    "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Title button",
+      "default": "View shop"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+      },
+	{
+      "type": "header",
+      "content": "List Products"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit",
+      "label": "Limit number",
+      "default": "8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product v3",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

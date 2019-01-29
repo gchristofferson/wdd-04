@@ -1,0 +1,32 @@
+<div class="filter filter-category">
+  <h3 class="filter-title">
+    {{section.settings.widget_cate_title}}
+  </h3>
+<div class="btn-filter-drop js-drop"><i class="ion-ios-arrow-down"></i></div>
+                            <div class="clearfix"></div>
+  <ul class="filter-content">
+    {% for link in linklists[section.settings.widget_cate_menu].links %}
+
+    {% assign item = link.title | downcase %}
+    {% assign child_list_handle = link.title | handleize %}
+    
+    {% if linklists[child_list_handle].links != blank %}
+    <li>
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      
+      <ul class="filter-menu-main">
+        {% for childlink in linklists[child_list_handle].links %}
+        <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    {% else %}
+    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endif %}
+
+    {% endfor %}
+    
+  </ul>
+
+</div>

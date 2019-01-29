@@ -1,0 +1,206 @@
+<div data-section-id="{{ section.id }}" data-section-type="newsletter-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--banner-->
+    <div class="collection-ver2">
+      <div class="container">
+              <div class="single-colect">
+                  <a href="{{section.settings.b1_img_url}}" class="hover-images img-colect">
+                      
+                    	<img {%if section.settings.b1_bg_img == blank%}src="{{'h3_c4.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{section.settings.b1_bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                      <div class="colect-content">
+                          <h3>{{section.settings.b1_title_1}}</h3>
+                          <p>{{section.settings.b1_title_2}}</p>
+                      </div>
+                  </a>
+
+              </div>
+              <div class="flex-colect">
+                  <div class="flex-two">
+                      <a href="{{section.settings.b2_img_url}}" class="hover-images img-colect">
+                          
+                        	<img {%if section.settings.b2_bg_img == blank%}src="{{'h3_c3.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{section.settings.b2_bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                          <div class="colect-content v2">
+                              <h3>{{section.settings.b2_title}}</h3>
+                          </div>
+                      </a>
+                  </div>
+                  <div class="flex-one">
+                      <div class="colect-img">
+                          <a href="{{section.settings.b3_img_url}}" class="hover-images">
+                            
+                            <img {%if section.settings.b3_bg_img == blank%}src="{{'h3_c1.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{section.settings.b3_bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                        	</a>
+                          <a href="{{section.settings.b4_img_url}}" class="hover-images">
+                            
+                             <img {%if section.settings.b4_bg_img == blank%}src="{{'h3_c2.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{section.settings.b4_bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                        	</a>
+                      </div>
+                      <div class="colect-newsletter">
+                          <span>{{section.settings.new_title}}</span>
+                        	{% if settings.newsletter_form_action != blank %}
+                            {% assign form_action = settings.newsletter_form_action %}
+                            {% else %}
+                            {% assign form_action = '#' %}
+                            {% endif %}
+                          <form action="{{ form_action }}" method="post" class="f-newsletter h3-newsletter">
+                              <input type="text" name="s" value="{% if customer %}{{ customer.email }}{% endif %}" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off" placeholder="{{section.settings.new_placeholder}}" class="form-control">
+                              <button type="submit" class="btn f-btn-submit">
+                                  <i class="{{section.settings.new_icon}}" aria-hidden="true"></i>
+                              </button>
+                          </form>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!--en-banner-->
+</div>
+{% schema %}
+{
+  "name": "Newsletter v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Image 1"
+    },
+	{
+      "type": "image_picker",
+      "id": "b1_bg_img",
+      "label": "Image",
+      "info": "385x300px recommended"
+    },
+	{
+      "id": "b1_img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+	{
+      "type": "header",
+      "content": "Content 1"
+    },
+	{
+      "type": "text",
+      "id": "b1_title_1",
+		"default":"PARADISE FOUND",
+      "label": "Title 1"
+    },
+      {
+      "type": "text",
+      "id": "b1_title_2",
+	"default":"first the packing, then the bliss",
+      "label": "Title 2"
+    },
+	{
+      "type": "header",
+      "content": "Image 2"
+    },
+	{
+      "type": "image_picker",
+      "id": "b2_bg_img",
+      "label": "Image",
+      "info": "385x330px recommended"
+    },
+	{
+      "id": "b2_img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+	{
+      "type": "header",
+      "content": "Content 2"
+    },
+	{
+      "type": "text",
+      "id": "b2_title",
+		"default":"SHOES & ACCESSORIES",
+      "label": "Title 1"
+    },
+	{
+      "type": "header",
+      "content": "Image 3"
+    },
+	{
+      "type": "image_picker",
+      "id": "b3_bg_img",
+      "label": "Image",
+      "info": "400x330px recommended"
+    },
+	{
+      "id": "b3_img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+	{
+      "type": "header",
+      "content": "Image 4"
+    },
+	{
+      "type": "image_picker",
+      "id": "b4_bg_img",
+      "label": "Image",
+      "info": "385x450px recommended"
+    },
+	{
+      "id": "b4_img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+      "type": "text",
+      "id": "new_title",
+		"default":"Register for latest news & discounts",
+      "label": "Newsletter Title"
+    },
+	{
+      "type": "text",
+      "id": "new_placeholder",
+		"default":"Your e-mail",
+      "label": "Newsletter placeholder"
+    },
+		{
+      "type": "text",
+      "id": "new_icon",
+		"default":"fa fa-check",
+      "label": "Newsletter icon"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter v1",
+      "category": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

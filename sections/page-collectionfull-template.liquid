@@ -1,0 +1,74 @@
+<div class="collection-full">
+      <div class="slider-collectionf js-slider-collectionf">
+        {% if section.blocks.size > 0 %}
+    		{% for block in section.blocks %}
+          <div class="items">
+            	<img {%if block.settings.img_slider == blank%}src="{{'f_1.jpg'| asset_url }}" 
+                          	{%else%}
+                      		src="{{block.settings.img_slider | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+              <div class="box-content-left text">
+                  <h3 class="slider-title">{{block.settings.text_1}}</h3>
+                  <p class="slider-desc">{{block.settings.text_2}}</p>
+              </div>
+          </div>
+        	
+    		{% endfor %}
+        {% endif %}
+      </div>
+       <div class="custom">
+           <div class="post-fade">
+           </div>
+           <div class="pagingInfo"></div>
+       </div>
+       <div class="f-colect-title">
+           <h3>{{section.settings.text_h}}</h3>
+       </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Page Collection Full",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text_h",
+      "label": "Heading page",
+		"default":"collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Image",
+      "name": "Image slide",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img_slider",
+          "label": "Image"
+        },
+		{
+          "type": "text",
+          "id": "text_1",
+          "label": "Title 1"
+        },
+		{
+          "type": "text",
+          "id": "text_2",
+          "label": "Title 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Collection Full"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+<div class="filter-block widget woocommerce widget_product_categories filter-tag filter filter-color">
+  <div class="form-group dropdown">
+    <span class="title-filter">{{section.settings.shop_by_color_title}}</span>
+    <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">
+    	<span class="dropdown-label">Choose color</span>
+    </button>
+    <ul class="dropdown-menu product-categories widget-inlineblock">
+      {% assign tags = section.settings.shop_by_color_list_tags | split: ',' %}
+    
+    {% for t in tags %}
+    {% assign tag = t | strip %}
+    {% assign tag_value = tag | handleize %}
+      <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+      <input type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+      <a href="javascript:void(0)" title="{{tag}}">{{tag}}</a>
+    </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

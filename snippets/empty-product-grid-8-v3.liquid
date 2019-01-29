@@ -1,0 +1,21 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..8) %}
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-item v3">
+        <div class="product-img v3">
+            <a href="/admin/products" class="hover-images effect">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </a>
+        </div>
+
+        <div class="product-info v3">
+            <h3 class="product-title"><a href="#">Brid in the Cage 299pln</a></h3>
+        </div>
+    </div>
+{% endfor %}

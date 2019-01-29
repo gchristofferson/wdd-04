@@ -1,0 +1,45 @@
+<div class="tab-absolute">
+    <ul class="nav nav-tabs text-center tab-rotate js-tabs">
+        {%if section.settings.enable_description_tab%}
+        <li><a data-toggle="pill" href="#desc">{{section.settings.destab_title}}</a></li>
+        {%endif%}
+        {% if section.settings.enable_custom_tab%}
+        <li><a data-toggle="pill" href="#info">{{section.settings.customtab_title}}</a></li>
+        {%endif%}
+        {%if section.settings.enable_review_tab%}
+        <li class="active"><a data-toggle="pill" href="#review">{{section.settings.reviewtab_title}}</a></li>
+        {%endif%}
+    </ul>
+    <span class="close-left-tab js-close-tab"></span>
+</div>
+<div class="detail-tab">
+    <div class="tab-content">
+        {%if section.settings.enable_description_tab%}
+        <div id="desc" class="tab-pane fade">
+            <div class="tab-desc">
+              	<h3 class="text-uppercase">{{section.settings.destab_title}}</h3>
+                {{product.description}}
+            </div>
+        </div>
+        {%endif%}
+        {% if section.settings.enable_custom_tab%}
+        <div id="info" class="tab-pane fade">
+            
+            {% if section.settings.custom_tab_option == "ct_ops_html" %}
+            {{section.settings.ct_option_2}}
+            {%  else %}
+            {{section.settings.ct_option_3}}    
+            {% endif %}
+        </div>
+        {%endif%}
+        {%if section.settings.enable_review_tab%}
+        <div id="review" class="tab-pane fade in active ">
+            <div class="tab-review">
+                
+                <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+                
+            </div>
+        </div>
+        {%endif%}
+    </div>
+</div>

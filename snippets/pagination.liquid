@@ -1,0 +1,11 @@
+<div class="pagination-left"><a href="#" class="backto vow-top"><i class="ion-ios-arrow-up"></i></a><span>Back to top</span></div>
+<div class="pagination-right">
+  <span>{{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}</span>
+ {% if paginate.previous.is_link %}
+      <a href="{{ paginate.previous.url }}" class="backto vow-right"><i class="ion-ios-arrow-left"></i></a>
+      {% endif %}
+ {% if paginate.next.is_link %}
+  <a href="{{ paginate.next.url }}" class="backto vow-right"><i class="ion-ios-arrow-right"></i></a>
+	{% endif %}
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,160 @@
+<div data-section-id="{{ section.id }}" data-section-type="newsletter-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<div class="vow-connect">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-3">
+                  <div class="connect-img">
+                      <a href="{{section.settings.b1_img_url}}">
+                        
+                        <img {%if section.settings.b1_bg_img == blank%}src="{{'home1_bt_1.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{section.settings.b1_bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                          <div class="box-content-left">
+                          <h3 class="connect-title v2">{{section.settings.b1_title}}</h3>
+                      </div>
+                      </a>
+                  </div>
+              </div>
+            	{% if section.blocks.size > 0 %} 
+         		{% for block in section.blocks %}
+              <div class="col-xs-4 col-sm-4 col-md-3">
+                  <div class="connect-img">
+                      <a href="{{block.settings.img_url}}" class="hover-images">
+                        
+                        <img {%if block.settings.shop_img == blank%}src="{{'home1_bt_2.jpg'| asset_url }}" 
+                          {%else%}
+                      src="{{block.settings.shop_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+                          <div class="box-content-left">
+                          		<h3 class="connect-title">{{block.settings.title}}</h3>
+                      		</div>
+                      </a>
+                  </div>
+              </div>
+            	{% endfor %}
+      			{% endif %}
+              <div class="col-xs-12 col-sm-12 col-md-3">
+                  <div class="newsletter text-center">
+                      <h3>{{section.settings.new_text_1}}</h3>
+                      <p>{{section.settings.new_text_2}}</p>
+                    	{% if settings.newsletter_form_action != blank %}
+                            {% assign form_action = settings.newsletter_form_action %}
+                            {% else %}
+                            {% assign form_action = '#' %}
+                            {% endif %}
+                      <form action="{{ form_action }}" method="post" class="f-newsletter v2 h-newsletter">
+                          <input type="text" name="s" value="{% if customer %}{{ customer.email }}{% endif %}" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off" placeholder="Your e-mail" class="form-control bd-bottom">
+                          <span class="f-btn-submit v2">
+                              <i class="ion-ios-plus-outline"></i>
+                          </span>
+                          <button type="submit" class="btn btn-send">Send
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Newsletter v2",
+	"max_blocks": 2,
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	{
+      "type": "header",
+      "content": "Image 1"
+    },
+	{
+      "type": "image_picker",
+      "id": "b1_bg_img",
+      "label": "Image",
+      "info": "276x305px recommended"
+    },
+	{
+      "id": "b1_img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+	{
+      "type": "text",
+      "id": "b1_title",
+		"default":"individual orders",
+      "label": "Title "
+	},
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+      "type": "text",
+      "id": "new_text_1",
+		"default":"NEWSLETTER",
+      "label": "Newsletter Title 1"
+    },
+	{
+      "type": "text",
+      "id": "new_text_2",
+		"default":"Register to our newletter to receive exclusive special offers & promotions.",
+      "label": "Newsletter Title 2"
+    },
+	{
+      "type": "text",
+      "id": "new_placeholder",
+		"default":"Your e-mail",
+      "label": "Newsletter placeholder"
+    }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "shop_img",
+            "label": "Image",
+            "info": "270 x 300px recommended"
+          },
+          {
+              "id": "img_url",
+              "type": "url",
+              "default": "/collections/all",
+              "label": "Image link"
+            },
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Title "
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Newsletter v2",
+        "category": "Newsletter"
+      }
+    ]
+  }
+{% endschema %}
+

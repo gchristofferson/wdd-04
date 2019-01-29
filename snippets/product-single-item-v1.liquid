@@ -1,0 +1,48 @@
+{% assign product = all_products[section.settings.product_single_1] %}
+<div class="col-xs-12 col-sm-6 col-md-6 flex-img">
+    <div class="product-img">
+        <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-responsive">
+        <div class="ribbon">HOT
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="product-info v4">
+      	{% assign current_variant = product.selected_or_first_available_variant %}
+        <p class="sku">// {{ current_variant.sku }}</p>
+        <h3 class="product-name"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h3>
+        <p class="product-desc-ver2">{{product.description}}</p>
+         {% capture price %}{{ product.price | money }}{% endcapture %}
+        <p class="product-price">
+            {% if product.price_varies %}<ins>{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}</ins>{% endif %}
+          {% if on_sale %} - <del>{{ product.compare_at_price | money }}</del>{% endif %} 
+
+        </p>
+		{% if sold_out %}
+        <a class="btn-addcart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ 'products.product.unavailable' | t }}">
+
+           {{ 'products.product.unavailable' | t }}
+        </a>
+        {% else %}
+          {% if product.variants.size > 1 %}
+            <a class="btn-addcart" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ settings.pia_selectoption_name }}">
+
+
+             {{settings.pia_selectoption_name }}
+            </a>
+            {% else %}
+            <form method="post" action="/cart/add" class="">
+              <span class="sr-only">{{ 'products.product.addtocart' | t }}</span>
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+              <button type="submit" name="add" id="AddToCart{{ product.id }}" class="btn-addcart no-border enj-add-to-cart-btn" data-toggle="tooltip" title="{{ settings.pia_addcart_name }}">
+
+                {{ 'products.product.addtocart' | t }}
+
+              </button>
+            </form>
+        {% endif %}
+    {% endif %}
+        <div class="countdown countdown-time" data-countdown="countdown" data-date="{{section.settings.hp_countdown}}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="hero-section v3">
+  <img src="{% if section.settings.abus_bg_header == blank %}https://placehold.it/1900x555{% else %}{{section.settings.abus_bg_header|img_url:'master'}}{% endif %}" alt="" class="img-responsive">
+  <div class="box-center">
+    <h1 class="page-title">{{page.title}}</h1>
+    {% include 'breadcrumb' %}
+  </div>
+</div>
+<!--our teams-->
+<div class="container agency-container v3">
+  <div class="about-shop-ver1">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 shop-content">
+        <h3 class="brand-title">{{section.settings.abus_br_title}}</h3>
+        <h2 class="agency-title-noline ver3">{{section.settings.abus_br_content1}}</h2>
+        <p>{{section.settings.abus_br_content2}}</p>
+        <div class="shop-social">
+          {{section.settings.abus_br_social}}
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="cosre-bg text-center">
+          <img src="{% if section.settings.abus_img == blank %}https://placehold.it/646x459{% else %}{{section.settings.abus_img|img_url:'master'}}{% endif %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-shop-ver2">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {% if block.type == 'infoblock' %}
+    <div class="shop-content ver2">
+      <h3 class="shop-title">{{block.settings.info_title}}</h3>
+      {{block.settings.info_content}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="container container-42">
+  <a href="{{section.settings.abus_si_url1}}">
+    <img src="{% if section.settings.abus_si_img1 == blank %}https://placehold.it/1817x1029{% else %}{{section.settings.abus_si_img1|img_url:'master'}}{% endif %}" alt="" class="img-responsive">
+  </a>
+</div>
+<div class="container agency-container v2">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <a class="hover-images" href="{{section.settings.abus_si_url2}}">
+        <img src="{% if section.settings.abus_si_img2 == blank %}https://placehold.it/648x800{% else %}{{section.settings.abus_si_img2|img_url:'master'}}{% endif %}" alt="about-img" class="img-reponsive">
+      </a>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 agency-clm-right ver2">
+      <a class="hover-images" href="{{section.settings.abus_si_url3}}">
+        <img src="{% if section.settings.abus_si_img3 == blank %}https://placehold.it/798x531{% else %}{{section.settings.abus_si_img3|img_url:'master'}}{% endif %}" alt="about-img" class="img-reponsive">
+      </a>
+    </div>
+  </div>
+</div>
+<!--end our teams-->
+
+{% schema %}
+{
+  "name": "Page About Shop",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "image_picker",
+      "id": "abus_bg_header",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Section Brand"
+    },
+    {
+      "type": "text",
+      "id": "abus_br_title",
+      "label": "Title",
+      "default": "THE BRAND"
+    },
+    {
+      "type": "textarea",
+      "id": "abus_br_content1",
+      "label": "Content 1",
+      "default": "Dramatically empower covalent opportunities before worldwide leadership skills"
+    },
+    {
+      "type": "textarea",
+      "id": "abus_br_content2",
+      "label": "Content 2",
+      "default": "Completely initiate cross functional e-markets whereas global growth strategies. Holisticly e-enable plug-and-play convergence and technically sound e-markets. Globally reintermediate web-enabled niches with accurate internal or organic sources. Uniquely evisculate impactful synergy rather than revolutionary process improvements. Enthusiastically maximize value-added channels whereas quality channels."
+    },
+    {
+      "type": "textarea",
+      "id": "abus_br_social",
+      "label": "Social"
+    },
+    {
+      "type": "image_picker",
+      "id": "abus_img",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Section Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "abus_si_img1",
+      "label": "Image 1"
+    },
+    {
+      "type": "url",
+      "id": "abus_si_url1",
+      "label": "URL 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "abus_si_img2",
+      "label": "Image 2"
+    },
+    {
+      "type": "url",
+      "id": "abus_si_url2",
+      "label": "URL 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "abus_si_img3",
+      "label": "Image 3"
+    },
+    {
+      "type": "url",
+      "id": "abus_si_url3",
+      "label": "URL 3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "infoblock",
+      "name": "Info block",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "info_title",
+          "label": "Title",
+          "default": "Address"
+        },
+        {
+          "type": "textarea",
+          "id": "info_content",
+          "label": "Content",
+          "default": "Creditcard"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page About Shop"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

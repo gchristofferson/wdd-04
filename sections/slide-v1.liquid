@@ -1,0 +1,77 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+   <div class=" {%if section.settings.enable_hslider %} page-right-content {%endif%}">
+    <div class="slider slider-home1">
+        <div class="js-slider-home1">
+          {% if section.blocks.size > 0 %} 
+         	{% for block in section.blocks %}
+          	<img {%if block.settings.bg_img == blank%}src="{{'slider_1_1.jpg'| asset_url }}" 
+           		{%else%}
+           	src="{{block.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />   
+          	{% endfor %}
+      		{% endif %}
+        </div>
+        <div class="btn-slider">
+            <a href="#" class="btn-arrow top-arrow"></a>
+            <a href="#" class="btn-arrow bottom-arrow"></a>
+        </div>
+    </div>
+    <!--endslide-->
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Slide v1",
+	"max_blocks": 3,
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	    {
+      "type": "header",
+      "content": "Option"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_hslider",
+      "label": "Disable slider fullwidth ",
+      "default": true
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "bg_img",
+          	"label": "Image Slider",
+			"info": "1675 x 961px recommended"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slide v1",
+      "category": "Slideshow"
+    }
+  ]
+}
+{% endschema %}

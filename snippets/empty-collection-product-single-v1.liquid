@@ -1,0 +1,15 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+<div class="collection-item">
+   <a href="/admin/products" class="hover-images">
+     {{ 'product-1' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+  	</a>
+   <div class="product-info v2">
+       <h3 class="product-title"><a href="/admin/products">ShopiLaunch Product</a></h3>
+   </div>
+</div>

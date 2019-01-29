@@ -1,0 +1,73 @@
+<div id="quick-view" class="hidden-label br-product-popup hidden">
+  <div class="quickview-wrapper">
+    <div class="overlay no-background" ></div>
+    <div class="content" id="quickview-content">
+      <div class="single-product-detail">
+        <div class="product-images product-carousel">
+
+        </div>
+
+        <div class="single-product-info js-price-wrapper">
+
+          <div class="product-detail-info prod-info ver2">
+
+            <h3 class="product-title text-uppercase"><a>&nbsp;</a></h3>
+
+            <div class="details clearfix">
+              <form action="/cart/add" method="post" class="variants CartContainer">
+                <div class="price-n">
+                  
+                  <span class="price mr-10"></span>
+					<span class="price old compare-price"></span>
+                </div>
+
+
+
+                <p class="product-desc"></p>
+
+
+                <select  name='id' style="display:none;" class="engoj-except-select2 product-single__variants">
+
+                </select>
+
+                <div class="product-actions action">
+                  
+                    <label>{{ 'products.product.quantity' | t }}</label>
+                  	<div class="vow-quantity v2">
+                    <div class="quantity input-group js-qty ">
+                      <button  class='qtyminus quantity-left-minus btn btn-number js-minus' data-field='quantity'><span class="minus-icon">-</span></button>
+                      <input type="text" name="quantity" value="1" class="qty  product_quantity_number js-number">
+                      <button class='qtyplus quantity-right-plus btn btn-number js-plus' data-field='quantity'><span class="plus-icon">+</span></button>
+                    </div>
+                  	</div>
+                    <div class="total-price product-price">
+<!--                       <label class="engoc_subtt_qw">{{ 'products.general.subtotal_price' | t }}:</label>
+                      <span class="br-product__price fz-16"></span> -->
+                    </div>
+                  
+
+                  <div class="product-action-ver2 detail-action">
+                    <button type="button" class="btn-addToCart v-add-cart">{{ 'products.product.addtocart' | t }}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="close-window"><i class="ion-close-round"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .single-product-detail .single-product-info .action .quantity {
+    float: initial;
+  }
+</style>
+
+<script type="text/javascript">
+  Shopify.doNotTriggerClickOnThumb = false;
+</script>

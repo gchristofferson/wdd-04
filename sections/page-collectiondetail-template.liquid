@@ -1,0 +1,266 @@
+<div class="container">
+    <div class="slider collection-slider">
+        <div class="colect-ovl ver2">
+        <div class="items">
+            <a href="#">
+              <img {%if section.settings.slide_img == blank%}src="{{'f_1.jpg'| asset_url }}" 
+              {%else%}
+              src="{{section.settings.slide_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+          	</a>
+            <div class="box-content-left text v2">
+                <h3 class="slider-title v2">{{section.settings.text_1}}</h3>
+                <p class="slider-desc v2">{{section.settings.text_2}}</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="essential v1">
+        <a href="#" class="hover-images">
+          
+          <img {%if section.settings.info_img == blank%}src="{{'c_1_2.jpg'| asset_url }}" 
+              {%else%}
+              src="{{section.settings.info_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+      	</a>
+        <div class="content">
+            <h3 class="title">{{section.settings.info_text_1}}</h3>
+            <p class="desc">{{section.settings.info_text_2}}</p>
+        </div>
+    </div>
+    <div class="slider-v2">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-3  col-xs-12">
+                <div class="slider-inside">
+                    <div class="js-slider-collectiond">
+                      	{% if section.blocks.size > 0 %}
+                        {% for block in section.blocks %}
+                        {% if block.type == 'c_slide' %}
+                        <div class="item">
+                          	<img {%if block.settings.s_slide_image == blank%}src="{{'s_1.jpg'| asset_url }}" 
+                          	{%else%}
+                      		src="{{block.settings.s_slide_image | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="custom-ver2">
+                         <div class="post-fade">
+                         </div>
+                 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="group-category-flex">
+        <div class="collection-category v1">
+            <div class="category category-top ">
+                <a href="{{section.settings.c1_url}}" class="hover-images">
+                  <img {%if section.settings.c1_img == blank%}src="{{'c_2.jpg'| asset_url }}" 
+              		{%else%}
+              		src="{{section.settings.c1_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+              	</a>
+                <div class="content-text text-toleft">
+                    <h3 class="cate-title">{{section.settings.c1_title}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="collection-category v2">
+            <div class="category category-bottom ">
+                <a href="{{section.settings.c2_url}}" class="hover-images">
+                  <img {%if section.settings.c2_img == blank%}src="{{'s_4.jpg'| asset_url }}" 
+              		{%else%}
+              		src="{{section.settings.c2_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+              	</a>
+                <div class="content-text text-toright">
+                    <h3 class="cate-title">{{section.settings.c2_title}}</h3>
+                </div>
+            </div>
+            <div class="category category-bottom ">
+                <a href="{{section.settings.c3_url}}" class="hover-images"> 
+              	<img {%if section.settings.c3_img == blank%}src="{{'s_5.jpg'| asset_url }}" 
+              		{%else%}
+              		src="{{section.settings.c3_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+              	</a>
+                <div class="content-text v2">
+                    <h3 class="cate-title">{{section.settings.c3_title}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="related-collection">
+        <h3 class="collect-title">{{section.settings.related_heading}}</h3>
+        <div class="colect-ovl">
+            <div class="row">
+              	{% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                {% if block.type == 'c_related' %}
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <a href="{{block.settings.related_url}}" class="hover-images">
+                      
+                      <img {%if block.settings.related_image == blank%}src="{{'s_6.jpg'| asset_url }}" 
+                          	{%else%}
+                      		src="{{block.settings.related_image | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+                  	</a>
+                    <h3 class="colect-title">{{block.settings.related_title}}</h3>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Collection Detail",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Slide"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_img",
+      "label": "Slide image"
+    },
+	{
+      "type": "text",
+      "id": "text_1",
+      "label": "Title 1",
+		"default":"wedding  dresses"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Title 2",
+	"default":"autumn 2018 by Jang Choou"
+    },
+    {
+      "type": "header",
+      "content": "Section Info"
+    },
+	{
+      "type": "image_picker",
+      "id": "info_img",
+      "label": "Info image"
+    },
+	{
+      "type": "text",
+      "id": "info_text_1",
+      "label": "Title 1",
+		"default":"HONEYMOON ESSENTIALS"
+    },
+    {
+      "type": "text",
+      "id": "info_text_2",
+      "label": "Title 2",
+	"default":"Tuck a flower by your ear and drink in the lazy"
+    },
+    {
+      "type": "header",
+      "content": "Section Collection"
+    },
+	{
+      "type": "image_picker",
+      "id": "c1_img",
+      "label": "Collection image 1"
+    },
+	{
+      "type": "url",
+      "id": "c1_url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "c1_title",
+      "label": "Collection Title 1",
+	  "default": "shoe"
+    },
+	{
+      "type": "image_picker",
+      "id": "c2_img",
+      "label": "Collection image 2"
+    },
+	{
+      "type": "url",
+      "id": "c2_url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "c2_title",
+      "label": "Collection Title 2",
+	  "default": "Madeline bride"
+    },
+	{
+      "type": "image_picker",
+      "id": "c3_img",
+      "label": "Collection image 3"
+    },
+	{
+      "type": "url",
+      "id": "c3_url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "c3_title",
+      "label": "Collection Title 3",
+	  "default": "accessories"
+    },
+	{
+      "type": "header",
+      "content": "Section Related Collection"
+    },
+	{
+      "type": "text",
+      "id": "related_heading",
+      "label": "Heading",
+	  "default": "Related Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "c_slide",
+      "name": "slide image",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "s_slide_image",
+          "label": "Slide Image"
+        }
+      ]
+    },
+    {
+      "type": "c_related",
+      "name": "related collection",
+      "limit": 2,
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "related_image",
+          "label": "Related Image"
+        },
+        {
+          "type": "text",
+          "id": "related_title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "related_url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Collection Detail"
+    }
+  ]
+}
+{% endschema %}

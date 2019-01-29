@@ -1,0 +1,239 @@
+{% paginate blog.articles by 12 %}
+<!--hero-section-->
+<div class="blog-banner">
+    <div class="blog-banner-img">
+        <a href="{{section.settings.img_url}}" class="hover-images">
+          
+          <img {% if section.settings.blog_bg_img == blank %}src="{{'banner-o.jpg'| asset_url }}" 
+                          	{%else%}
+                      		src="{{section.settings.blog_bg_img|img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+      	</a>
+        <div class="banner-title">
+            <h3>{{ page_title }}</h3>
+        </div>
+    </div>
+</div>
+<!--end hero-section-->
+
+{% if section.settings.layout == 'blog_classic' %}
+	{% include 'blog-template-classic' %}
+{% elsif section.settings.layout == 'blog_grid' %}
+	{% include 'blog-template-grids' %}
+{% else %}
+    {% include 'blog-template-grids2' %}
+{% endif %}
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Blog pages",
+  "settings": [
+    {
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "blog_classic",
+        "options": [
+        {
+          "value": "blog_classic",
+          "label": "Blog Sidebar Left"
+        },
+        {
+          "value": "blog_grid",
+          "label": "GRID 3 COLUMN"
+        },
+        {
+          "value": "blog_grid_2",
+          "label": "GRID 4 COLUMN"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "blog_bg_img",
+      "label": "Header Background Image"
+    },
+    {
+      "type": "header",
+      "content": "Blog sidebar",
+      "info": "*only for layout Blog Sidebar Left"
+    },
+    {
+      "type": "header",
+      "content": "Widget Social"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_social",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_social_title",
+      "label": "Widget Title",
+      "default": "Stay in touch with us"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_categories",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_categories_title",
+      "label": "Widget Title",
+      "default": "Categories"
+    },
+    {
+      "type": "link_list",
+      "id": "widget_categories_menu",
+      "label": "Widget Menu"
+    },
+    {
+      "type": "header",
+      "content": "Widget Latest Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_rposts",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_recent_title",
+      "label": "Widget Title",
+      "default": "Latest posts"
+    },
+    {
+      "type": "blog",
+      "id": "select_blog",
+      "label": "Choose Blog"
+    },
+    {
+      "type": "text",
+      "id": "limit_blog",
+      "label": "Limit posts",
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > General Settings tab > General > Mailchimp",
+      "content": "Widget Newletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_newletter",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "Subscribe to my Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder",
+      "default": "Your email ..."
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "Submit"
+    },
+    {
+      "type": "header",
+      "content": "Widget Instagram"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_instagram",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_instagram_title",
+      "label": "Widget Title",
+      "default": "Instagram"
+    },
+    {
+      "type": "text",
+      "id": "instagram_userid",
+      "label": "User ID Instagram",
+      "default": "3672948962"
+    },
+    {
+      "type": "text",
+      "id": "instagram_access_token",
+      "label": "Access Token Instagram",
+      "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+    },
+    {
+      "type": "text",
+      "id": "instagram_limit_number",
+      "label": "Limit Image",
+      "default": "6"
+    },
+    {
+      "type": "header",
+      "content": "Widget Banner"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_widget_banner",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Image",
+      "info": "270x400px recommended"
+    },
+    {
+      "id": "img_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Image link"
+    },
+    {
+      "type": "header",
+      "content": "Widget Tags"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_tags",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_tags_title",
+      "label": "Widget Title",
+      "default": "Tags"
+    },
+    {
+      "type": "header",
+      "content": "Config"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "Show date",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

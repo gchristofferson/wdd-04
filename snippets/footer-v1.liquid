@@ -1,0 +1,77 @@
+<footer class="footer-v1">
+    <a href="#" class="scroll-top" style= {% if template contains 'index' %} "background:{{settings.fv1_scroll_bg}}; {%else%}background:{{settings.fv1_o_scroll_bg}};{%endif%}"><i class="ion-ios-arrow-up"></i></a>
+  	{% if settings.enable_fv1_ftop or template contains 'index' %}
+    <div class="top-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <h3 class="f-title mb-24">{{settings.fv1_c1_newsletter}}</h3>
+                    <form action="#" class="f-newsletter v2">
+                        <input type="email" class="form-control" value="{% if customer %}{{ customer.email }}{% endif %}" name="EMAIL" id="mail" placeholder="{{settings.fv1_c1_placeholder}}">
+                        <button type="submit" class="btn f-btn-submit">
+                            <i class="ion-ios-plus-outline"></i>
+                        </button>
+                    </form>
+                    <h3 class="f-title mb-24">{{settings.fv1_c1_social}}</h3>
+                    <div class="f-social-menu v2">
+                        {{settings.fv1_c1_social_input}}
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 col-xs-3">
+                    <h3 class="f-title">{{settings.fv1_c2_title}}</h3>
+                    {% assign footer_menu = settings.fv1_c2_menu%}
+                    <ul class="f-menu">
+                        {% for link in linklists[footer_menu].links %}
+                        <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 col-xs-3">
+                    <h3 class="f-title">{{settings.fv1_c3_title}}</h3>
+                    {% assign footer_menu = settings.fv1_c3_menu%}
+                    <ul class="f-menu">
+                        {% for link in linklists[footer_menu].links %}
+                        <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 col-xs-3">
+                    <h3 class="f-title">{{settings.fv1_c4_title}}</h3>
+                    {% assign footer_menu = settings.fv1_c4_menu%}
+                    <ul class="f-menu">
+                        {% for link in linklists[footer_menu].links %}
+                        <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 col-xs-3">
+                    <h3 class="f-title">{{settings.fv1_c5_title}}</h3>
+                    {% assign footer_menu = settings.fv1_c5_menu%}
+                    <ul class="f-menu">
+                        {% for link in linklists[footer_menu].links %}
+                        <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  	{% endif %}
+    <div class="copyright"	style= {% if template contains 'index' %} "background:{{settings.fv1_bottom_bg}}; {%else%}background:{{settings.fv1_o_bottom_bg}};{%endif%}" >
+        <div class="container">
+            <div class="row">
+                {% if settings.fv1_copyright != blank %}
+                <span style= {% if template contains 'index' %} "color:{{settings.fv1_text}}; {%else%}color:{{settings.fv1_o_text}};{%endif%}">{{settings.fv1_copyright}}</span>
+                {% else %}
+                <span style= {% if template contains 'index' %} "color:{{settings.fv1_text}}; {%else%}color:{{settings.fv1_o_text}};{%endif%}">Copyright &copy; {{ 'now' | date: "%Y" }} EngoTheme. All Rights Reserved</span>
+                {% endif %}
+                {% assign footer_menu = settings.fv1_copyright_menu%}
+                <ul class="footer-menu">
+                    {% for link in linklists[footer_menu].links %}
+                    <li><a style= {% if template contains 'index' %} "color:{{settings.fv1_text}}; {%else%}color:{{settings.fv1_o_text}};{%endif%}" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

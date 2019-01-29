@@ -1,0 +1,33 @@
+<div class="main-content space-padding-tb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <div class="customer-page">
+            <h3 class=" page-title text-center">{{ 'customer.register.title' | t }}</h3>
+          {% form 'create_customer' %}
+          {{ form.errors | default_errors }}
+          <div class="form-customer form-login">
+            <div class="form-group">
+              <label for="Email">{{ 'customer.register.email' | t }}</label>
+              <input type="email" class="form-control form-account" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} input--error{% endif %}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">     
+            </div>            
+
+            <div class="form-group">
+              <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
+              <input type="password" class="form-control form-account" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} input--error{% endif %}">             
+            </div>            
+
+            <div class="form-check">
+              <button type=submit class="btn-login btn-register hover-white">{{ 'customer.register.submit' | t }}</button>  
+            </div>
+
+          </div>
+        
+        {% endform %}
+          <span class="divider"></span>
+        <a href="/account/login" class="btn link-button create-account hover-black">{{ 'customer.login.title' | t }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

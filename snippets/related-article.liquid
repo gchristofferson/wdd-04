@@ -1,0 +1,22 @@
+<div class="related-post">
+    <h3 class="text-center">{{ 'blogs.article.related' | t }}</h3>
+    {%- assign blog_selected = section.settings.choose_blog -%}
+    <div class="container">
+        <div class="owl-carousel owl-theme js-owl-blog">
+            {% for article in blogs[blog_selected].articles limit: 10 %}
+            <div class="blog-item">
+                <div class="post-img"><a href="{{ article.url }}" class="hover-images"><img src="{{ article.image.src | img_url: 'original' }}" alt="{{ article.title }}" class="img-responsive"></a></div>
+                <div class="post-info v2">
+                    <h3 class="post-title v3"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                    <div class="post-element">
+                        {% if section.settings.show_date%}
+                        <div class="post-date">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+                        {% endif %}
+                        <div class="post-date post-author">{{ article.author }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

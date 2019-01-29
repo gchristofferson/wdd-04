@@ -1,0 +1,76 @@
+
+
+
+<div class="banner effect_img2">
+    <a class="" href="#">
+      <img {%if section.settings.header_bg == blank%}src="{{'c_banner_1.jpg'| asset_url }}" 
+         {%else%}
+         src="{{section.settings.header_bg | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+  	</a>
+</div>
+
+<div class="container">
+    {% include 'breadcrumb-w'%}
+    <h1 class="page-title text-center">{{collection.title}}</h1>
+</div>
+
+<div class="wrap-filter">
+  {% include 'collection-sorting'%}
+</div>
+<div class="container container-42">
+  <div class="row">
+
+    <div class="col-md-12 col-sm-12 grid-uniform">
+      <div class="product-grid modern-grid">
+
+        <div class="row">
+          {% for product in collection.products %}
+          {% include 'product-collection-grids'%}
+          {% else %}
+          {% comment %}
+          Add default products to help with onboarding for collections/all only.
+
+          The onboarding styles and products are only loaded if the
+          store has no products.
+          {% endcomment %}
+          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+          <div class="grid__item">
+            <div class="grid grid--uniform">
+              {% for i in (1..limit) %}
+              <div class="grid__item {{ grid_item_width }}">
+                <div class="grid-view-item">
+                  <a href="#" class="grid-view-item__link">
+                    <div class="grid-view-item__image">
+                      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                      {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                    <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                    <div class="grid-view-item__meta">
+                      <span class="product-price__price">$19.99</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+          </div>
+          {% else %}
+          {%- assign is_empty_collection = true -%}
+          {% endif %}
+          {% endfor %}
+
+        </div>
+        {% if is_empty_collection %}
+        <div class="grid__item small--text-center">
+          <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+        {% endif %}
+        <div class="productfull-bottom v2">
+            <div class="pagination-left"><a href="#" class="backto vow-top"><i class="ion-ios-arrow-up"></i></a><span>Back to top</span></div>
+            <div class="pagination-right"><span>1 of 3</span><a href="#" class="backto vow-right"><i class="ion-ios-arrow-right"></i></a></div>
+            <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

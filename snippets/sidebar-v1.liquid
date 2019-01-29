@@ -1,0 +1,17 @@
+<div class="page-left-sidebar">
+  <div class="navbar-wrapper">
+      <div class="logo v3 hidden-xs hidden-sm">
+        <a href="{{shop.url}}" title="{{shop.name}}">
+          <img 
+          {%if settings.hdv1_logo == blank%}src="{{'hdv1_logo.png'| asset_url }}" 
+          {%else%}src="{{settings.hdv1_logo | img_url:'master'}}" class="img-reponsive"{%endif%} alt="logo" />
+        </a>
+      </div>
+      <nav class="main-menu v3 hidden-xs hidden-sm">
+          <div class="collapse navbar-collapse">
+              {% include 'menu-sidebar'%}
+          </div>
+      </nav>
+      {% include 'social-header'%}
+  </div>
+</div>
